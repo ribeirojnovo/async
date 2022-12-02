@@ -7,9 +7,9 @@ asyncSetTimeout(() => 2 + 2, 2000).then((result) =>
 
 /* **** Exercise 1 b) **** */
 import SimpleService from "./lib/service";
-import { PromiseWithCancellation } from "./exercise.1b";
 import { PromiseAll } from "./exercise.2a";
 import { PromiseAllSettled } from "./exercise.2b";
+import { PromiseWithCancellation } from "./exercise.1b";
 
 const promise = SimpleService.fetch({ timeout: 3000 });
 

@@ -1,6 +1,27 @@
 import { Component } from '@angular/core';
 import SimpleService from '../lib/service';
 
+class AppMessageView {
+  message: string | undefined;
+  loading: boolean = true;
+
+  constructor(key?: string) {
+    if (!key) {
+      this.message = 'Choose you option!';
+      this.loading = false;
+      return;
+    }
+    this.init(key);
+  }
+
+  private init(key: string) {
+    SimpleService.fetch({ key }).then((message) => {
+      this.message = message;
+      this.loading = false;
+    });
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,30 +29,21 @@ import SimpleService from '../lib/service';
 })
 export class AppComponent {
   title = 'Carlos';
-  message = 'Choose you option!';
-  loading = false;
+  model: AppMessageView;
+
+  constructor() {
+    this.model = new AppMessageView();
+  }
 
   onMyNameClick() {
-    this.loading = true;
-    SimpleService.fetch({ key: 'name' }).then((message) => {
-      this.message = message;
-      this.loading = false;
-    });
+    this.model = new AppMessageView('name');
   }
 
   onMyFavouriteDishClick() {
-    this.loading = true;
-    SimpleService.fetch({ key: 'dish' }).then((message) => {
-      this.message = message;
-      this.loading = false;
-    });
+    this.model = new AppMessageView('dish');
   }
 
   onMyFavouriteTripClick() {
-    this.loading = true;
-    SimpleService.fetch({ key: 'trip' }).then((message) => {
-      this.message = message;
-      this.loading = false;
-    });
+    this.model = new AppMessageView('trip');
   }
 }
