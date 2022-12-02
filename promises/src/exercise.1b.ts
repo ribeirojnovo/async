@@ -1,4 +1,4 @@
-import { asyncSetTimeout } from "./exercise.1a";
+// import { asyncSetTimeout } from "./exercise.1a";
 
 /* **** Exercise 1 **** */
 
@@ -11,12 +11,4 @@ declare function IPromiseWithCancellation<T>(
   timeout: number
 ): Promise<T | { cancelation: true }>;
 
-function PromiseWithCancellation<T>(
-  promise: Promise<T>,
-  timeout: number
-): Promise<void | Awaited<T> | { cancelled: boolean }> {
-  const asyncPromise = asyncSetTimeout(() => ({ cancelled: true }), timeout);
-  return Promise.race([promise, asyncPromise]);
-}
-
-export { PromiseWithCancellation };
+// export { PromiseWithCancellation };

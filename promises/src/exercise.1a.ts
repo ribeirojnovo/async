@@ -16,10 +16,4 @@ declare function IAsyncSetTimeout<T>(
 		`
 */
 
-function asyncSetTimeout<T>(fn: () => T, timeout: number): Promise<T> {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(fn()), timeout);
-  });
-}
-
-export { asyncSetTimeout };
+// export { asyncSetTimeout };

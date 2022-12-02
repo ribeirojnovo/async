@@ -13,35 +13,4 @@ declare function IPromiseAllSettled<T>(
   }
 */
 
-function PromiseAllSettled<T>(
-  promises: Promise<T>[]
-): Promise<Awaited<T | { error: "PROMISE REJECTED" }>[]> {
-  const numberOfPromises = promises.length;
-  const fulfilledPromises = Array(numberOfPromises);
-  let counter = 0;
-
-  return new Promise((resolve) => {
-    promises.forEach((promise, index) => {
-      promise
-        .then((result) => {
-          counter++;
-          fulfilledPromises[index] = result;
-
-          if (counter === numberOfPromises) {
-            resolve(fulfilledPromises);
-          }
-        })
-        .catch(() => {
-          counter++;
-          fulfilledPromises[index] = {
-            error: "PROMISE REJECTED",
-          };
-          if (counter === numberOfPromises) {
-            resolve(fulfilledPromises);
-          }
-        });
-    });
-  });
-}
-
-export { PromiseAllSettled };
+// export { PromiseAllSettled };
